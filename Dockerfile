@@ -1,11 +1,15 @@
 # Selecting the base image 
 FROM ubuntu:latest
 
+# Configuring timezone
+ENV TZ=Europe/Vilnius
+RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
+
 # Updating all the packages
 RUN apt-get update && apt-get -y update
 
 # Installing the essentials
-RUN apt-get install -y build-essential python3.7 python3-pip python3-dev
+RUN apt-get install -y apt-utils build-essential python3.7 python3-pip python3-dev graphviz
 
 # Instaling pip 
 RUN pip3 -q install pip --upgrade
